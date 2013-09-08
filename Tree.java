@@ -1,16 +1,11 @@
 /*
 *Sources Used:
 *	-Core Java: Volume I -- Fundamentals 9th Edition Chapter 6
-*		Interfaces
+*		Interfaces, Chapter 13 Collections
 *	-Java API: Interface List<E>
 *	-The Java Tutorials The List Interface
 *	-The Java Tutorials The Set Interface
 *	-A lot of guessing from Console error reports 
-*/
-
-/*
-*Made this an abstract class to elimate error saying Tree would not
-*override abstract method in subList(int,int) in java.util.List
 */
 
 import java.util.List;
@@ -24,7 +19,7 @@ import java.util.Iterator;
 *
 *@author McGuire, Matthew (mmcgui36@msudenver.edu)
 */
-public abstract class Tree<V> implements Iterable<Tree<V>>{
+public class Tree<V> extends Object implements Iterable<Tree<V>>{
 	/*
 	*Making Lists/Variables to be used to return values
 	*(Doing this so code compiles)
@@ -45,19 +40,16 @@ public abstract class Tree<V> implements Iterable<Tree<V>>{
 	}
 
 	/**Tree Constructor passing in value of V as root value 
-	*@param v will be the root value of the tree
+	*@param rootValue will be the root value of the tree
 	*/
-	public Tree(int v){
-		/*
-		*Passing in int just so it compiles for now
-		*/
+	public Tree(V rootValue){
 	}
 
 	/**
 	*Copy of orignal Tree
-	*@param v create a duplicate Tree
+	*@param original create a duplicate Tree
 	*/
-	public Tree(Tree v){
+	public Tree(Tree<V> original){
 	}
 
 	/**
@@ -78,10 +70,10 @@ public abstract class Tree<V> implements Iterable<Tree<V>>{
 
 	/**
 	*Search for specific value in tree
-	*@param v The value to be searched in the Tree
+	*@param value The value to be searched in the Tree
 	*@return boolean value for found / not found value
 	*/
-	public boolean contains(int v){
+	public boolean contains(V value){
 		return boolValue;
 	}
 
@@ -114,8 +106,8 @@ public abstract class Tree<V> implements Iterable<Tree<V>>{
 	*Returns a value for the root node of this tree
 	*@return Value at Root
 	*/
-	public int getRootValue(){
-		return value; 
+	public V getRootValue(){
+		return null; 
 	}
 
 	/**
@@ -205,12 +197,8 @@ public abstract class Tree<V> implements Iterable<Tree<V>>{
 	*@param value new value of root
 	*@return  previous value of root
 	*/
-	public int setRootValue(int value){
-	/*
-	*Right now it wold return the same value, this will be changed
-	*to work as in the documentation when method bodies are developed
-	*/
-		return value;
+	public V setRootValue(V value){
+		return null;
 	}
 
 	/**
