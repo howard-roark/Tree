@@ -12,12 +12,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.TreeSet;
-import java.util.Iterator;
 import java.util.Queue;
 
 /**
-*This is the framework for the tree that we will build and use in CS_390I
+*A general purpose tree with arbitrary degree. The empty tree contains no nodes.
+*A non empty tree has exactly one node designated as its root and zero or more
+*child subtrees each of whose are connected with the root by a directed edge.
 *
+*@version initial(0.1) [10 September 2013]
 *@author McGuire, Matthew (mmcgui36@msudenver.edu)
 */
 public class Tree<V> implements Iterable<Tree<V>>{
@@ -30,9 +32,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     List<V> valuesList = new ArrayList<V>();
     Set<Tree<V>> subTreeSet = new TreeSet<Tree<V>>();
     Set<V> valuesSet = new TreeSet<V>();
-    Iterator<Tree<V>> iterator = treeList.iterator();
-    int value = 0;
-    boolean boolValue = true;
+
 
     /**
     *Tree Constructor Method
@@ -75,7 +75,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return boolean value for found / not found value
     */
     public boolean contains(V value){
-    return boolValue;
+    return false;
     }
 
     /**
@@ -116,21 +116,16 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return Height of Tree
     */
     public final int height(){
-        return value;
+        return -1;
     }
 
     /**
     *Returns an iterator over the subtrees of the Tree
     *@return returns an iterator to move through treeList
     */
-    public Iterator<Tree<V>> iterator(){
-    return iterator;
-        /*
-        *This iterator will only be able to iterate through
-        *the Tree list, it will not iterate through a set
-        *or the childList, Not sure if this is how we need it
-        *it to work.
-        */
+    @Override
+    public java.util.Iterator<Tree<V>> iterator(){
+    return null;
     }
 
     /**
@@ -138,7 +133,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return Max amount of children for tree
     */
     public int maxDegree(){
-        return value;
+        return -1;
     }
 
     /**
@@ -146,7 +141,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return amount of parent nodes
     */
     public final int numberOfInternalNodes(){
-        return value;
+        return -1;
     }
 
     /**
@@ -154,7 +149,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return number of all non-parent nodes in tree
     */
     public final int numberOfLeafNodes(){
-        return value;
+        return -1;
     }
 
     /**
@@ -162,25 +157,35 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return Total number of nodes in tree
     */
     public final int numberOfNodes(){
-        return value;
+        return -1;
     }
 
     /**
-    *Restore a tree from saved file
+    *Restore a tree from a file
+    *<br /><em>Postconditions:</em>
+    *<blockquote>If successful, previous contents of this tree have
+    *been replaced by the contents of the file.
+    *If unsuccessful, content of the tree is unchanged.</blockquote>
     *@param filename filename to restore tree from
-    *@return 	 returned whether a tree exists in file
+    *@return <code>true</code> if successful restore;
+    *        <code>false</code> otherwise
+    *@throws java.io.IOException if unexpected IO error
     */
-    public final boolean restore(String filename){
-        return boolValue;
+    public final boolean restore(final String filename) throws java.io.IOException{
+        if (false){throw new java.io.IOException();}
+        return false;
     }
 
     /**
-    *Save a tree to a file
-    *@param filename filename to store tree to
-    *@return 	 boolean values to confirm save
+    *Save this tree to a file
+    *@param filename filename to store this tree to
+    *@return <code>true</code> successfully saved
+    *        <code>false</code> otherwise
+    *@throws java.io.IOException if unexpected IO error
     */
-    public final boolean save(String filename){
-        return boolValue;
+    public final boolean save(final String filename) throws java.io.IOException{
+        if (false){throw new java.io.IOException();}
+        return false;
     }
 
     /**
