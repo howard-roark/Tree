@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.Queue;
+import java.util.LinkedList;
 
 /**
 *A general purpose tree with arbitrary degree. The empty tree contains no nodes.
@@ -22,28 +23,45 @@ import java.util.Queue;
 *@version initial(0.1) [10 September 2013]
 *@author McGuire, Matthew (mmcgui36@msudenver.edu)
 */
+
 public class Tree<V> implements Iterable<Tree<V>>{
     /*
     *Making Lists/Variables to be used to return values
     *(Doing this so code compiles)
     */
     List<Tree<V>> treeList = new ArrayList<Tree<V>>();
-    List<Tree<V>> childrenList = new ArrayList<Tree<V>>();
     List<V> valuesList = new ArrayList<V>();
     Set<Tree<V>> subTreeSet = new TreeSet<Tree<V>>();
     Set<V> valuesSet = new TreeSet<V>();
 
+    /** Value of the root of this tree*/
+    private V rootValue;
+    /**Value of previous root value after setRootValue is called*/
+    private V prevRootVal;
+    /**Number of nodes in this tree, 0 indicates empty tree*/
+    private int numberOfNodes;
+    /**Children of the root of this tree*/
+    private List<Tree<V>> childrenList;
+    /**Tree object for duplication*/
+    private Tree<V> dupTree;
 
     /**
     *Tree Constructor Method
     */
     public Tree(){
+        this.numberOfNodes = 0;
     }
 
     /**Tree Constructor passing in value of V as root value
     *@param rootValue will be the root value of the tree
     */
     public Tree(final V rootValue){
+        this.rootValue = rootValue;
+        this.childrenList = new ArrayList<Tree<V>>();
+        this.numberOfNodes = 1;
+        /*Are we not passing the rootValue into the ArrayList?*/
+        /*If so how, if not what implications does this have for finding rootValue
+         * since each "node" is potentially a root*/
     }
 
     /**
@@ -51,6 +69,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@param original create a duplicate Tree
     */
     public Tree(final Tree<V> original){
+        this.dupTree = original;
     }
 
     /**
@@ -58,6 +77,14 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return List of subtrees
     */
     public List<Tree<V>> breadthFirstSubtrees(){
+        /*I am having a hard time seeing beyond the first level of the tree.  I think
+         * this may be because I am having a hardtime understanding where rootValue is, is
+         * it just a instance varialble attached to the object when it is created, I feel
+         * this cannot be the case due to the fact that each node is a possible root.
+         * How do we determine if it is a rootValue, how do we use that rootValue once found
+         * to add another Tree underneath that rootValue?
+         * Also while using recursion how can we tell if we have dropped a level or if
+         * we have just been going straight across one level of the tree?*/
     return treeList;
     }
 
@@ -66,6 +93,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return list of values
     */
     public List<V> breadthFirstValues(){
+        /*Same question as breadthfirstsubtrees()*/
     return valuesList;
     }
 
@@ -75,6 +103,16 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return boolean value for found / not found value
     */
     public boolean contains(V value){
+        /*I know this is not correct, I do not know how to use inclusive or logic
+         * to compare the value being passed in and the values in the tree*/
+        if(value.equals(rootValue)){
+            return true;}
+        else{
+            for(Tree<V> v : childrenList){
+                if(v.equals(value));
+                return true;
+            }
+        }
     return false;
     }
 
@@ -83,6 +121,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return list of subtrees
     */
     public List<Tree<V>> depthFirstSubtrees(){
+        /*Same issues as breadthfirstsubtrees()*/
         return treeList;
     }
 
@@ -92,6 +131,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return list of values in tree
     */
     public List<V> depthFirstValues(){
+        /*Same issues as breadthfirstsubtrees()*/
         return valuesList;
     }
 
@@ -100,6 +140,8 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return List of children in this tree
     */
     public final List<Tree<V>> getRootChildren(){
+        /*This is also a problem for me not being able to see how to single out a single
+         * root*/
         return childrenList;
     }
 
@@ -108,7 +150,9 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return Value at Root
     */
     public final V getRootValue(){
-        return null;
+        /*This is also a problem for me not being able to see how to single out a single
+         * root*/
+        return rootValue;
     }
 
     /**
@@ -195,6 +239,7 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *            that were replaced
     */
     public final List<Tree<V>> setRootChildren(final List<Tree<V>> children){
+        this.childrenList = children;
         return childrenList;
     }
 
@@ -204,7 +249,9 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return  previous value of root
     */
     public final V setRootValue(final V value){
-        return null;
+        prevRootVal = rootValue;
+        this.rootValue = value;
+        return prevRootVal;
     }
 
     /**
