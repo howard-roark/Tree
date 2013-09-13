@@ -42,6 +42,8 @@ public class Tree<V> implements Iterable<Tree<V>>{
     private int numberOfNodes;
     /**Children of the root of this tree*/
     private List<Tree<V>> childrenList;
+    /**List to return for resetting childrenList*/
+    private List<Tree<V>> prevChildrenList;
     /**Tree object for duplication*/
     private Tree<V> dupTree;
 
@@ -58,9 +60,12 @@ public class Tree<V> implements Iterable<Tree<V>>{
     public Tree(final V rootValue){
         this.rootValue = rootValue;
         this.childrenList = new ArrayList<Tree<V>>();
+        /*this.childrenList.add(rootValue);*/
         this.numberOfNodes = 1;
         /*Are we not passing the rootValue into the ArrayList?*/
-        /*If so how, if not what implications does this have for finding rootValue
+        /*If so how since when you pass a Collection into ArrayList it uses the
+         * collections iterator to place the items into the Arraylist,
+         * if not what implications does this have for finding rootValue
          * since each "node" is potentially a root*/
     }
 
@@ -85,6 +90,8 @@ public class Tree<V> implements Iterable<Tree<V>>{
          * to add another Tree underneath that rootValue?
          * Also while using recursion how can we tell if we have dropped a level or if
          * we have just been going straight across one level of the tree?*/
+        /*I think this question may be unclear, I have drawn out what I visualize in my
+         * head as to what is going on with the tree that I will bring Monday*/
     return treeList;
     }
 
@@ -150,8 +157,6 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return Value at Root
     */
     public final V getRootValue(){
-        /*This is also a problem for me not being able to see how to single out a single
-         * root*/
         return rootValue;
     }
 
@@ -160,6 +165,8 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return Height of Tree
     */
     public final int height(){
+        /*How do I know if I have dropped a level while using recursion?*/
+        /*Do we need the iterator to be able to write this method?*/
         return -1;
     }
 
@@ -201,7 +208,13 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return Total number of nodes in tree
     */
     public final int numberOfNodes(){
-        return -1;
+        int count = 0;
+        /*Where to start count to account for first rootValue not being added to
+         * list, unless it is?*/
+        for(Tree<V> v : childrenList){
+            count++;
+        }
+        return count;
     }
 
     /**
@@ -239,8 +252,9 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *            that were replaced
     */
     public final List<Tree<V>> setRootChildren(final List<Tree<V>> children){
+        prevChildrenList = this.childrenList;
         this.childrenList = children;
-        return childrenList;
+        return prevChildrenList;
     }
 
     /**
@@ -259,6 +273,9 @@ public class Tree<V> implements Iterable<Tree<V>>{
     *@return the set of subtrees
     */
     public Set<Tree<V>> subtrees(){
+        /*If I return a set does it automatically remove duplicates or does
+         * this method have to remove duplicates, place the nodes back into
+         * the set in the same order as the list and return that as the set?*/
         return subTreeSet;
     }
 
